@@ -1,7 +1,7 @@
 defmodule Test do
 
   def factorial(num) do
-    if num===1 do
+    if num===0 do
       1
     else
       num*factorial(num-1)
