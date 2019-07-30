@@ -1,0 +1,5 @@
+defmodule MatchstickFactory do
+  def boxes(num) do
+    %{"big" => div(num,50), "medium"=> div(rem(num,50),20),"remaining"=> rem(rem(rem(num,50),20),5), "small" => div(rem(rem(num,50),20),5)}
+  end
+end
