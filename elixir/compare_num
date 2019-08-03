@@ -1,0 +1,11 @@
+defmodule Compare_num do
+  def greater(num1, num2) do
+    check(num1>=num2,num1,num2)
+  end
+
+  defp check(true,num,_)do
+    num
+  end
+
+  defp check(false,_,num),do: num 
+end
