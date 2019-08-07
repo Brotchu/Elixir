@@ -1,0 +1,42 @@
+defmodule NumtoWord do
+  def toword(num) when (num <100 and num >19 ) or (num <100 and num <10) do
+    ten_digit=div(num,10)
+    single_digit=rem(num,10)
+    "#{tens(ten_digit)} #{singles(single_digit)}"
+  end
+  def toword(num) when (num<20 and num>9) do
+    "#{teens(num)}"
+  end
+  def toword(_), do: "invalid"
+
+  def tens(3), do: "thirty"
+  def tens(2), do: "twenty"
+  def tens(4), do: "forty"
+  def tens(5), do: "fifty"
+  def tens(6), do: "sixty"
+  def tens(7), do: "seventy"
+  def tens(8), do: "eighty"
+  def tens(9), do: "ninety"
+  def tens(0), do: " "
+
+  def singles(1), do: "one"
+  def singles(2), do: "two"
+  def singles(3), do: "three"
+  def singles(4), do: "four"
+  def singles(5), do: "five"
+  def singles(6), do: "six"
+  def singles(7), do: "seven"
+  def singles(8), do: "eight"
+  def singles(9), do: "nine"
+  def singles(0), do: ""
+
+  def teens(11), do: "eleven"
+  def teens(12), do: "twelve"
+  def teens(13), do: "thirteen"
+  def teens(14), do: "fourteen"
+  def teens(15), do: "fifteen"
+  def teens(16), do: "sixteen"
+  def teens(17), do: "seventeen"
+  def teens(18), do: "eighteen"
+  def teens(19), do: "nineteen"
+end
