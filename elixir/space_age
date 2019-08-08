@@ -1,12 +1,8 @@
 defmodule Age do
 
-  def age(sec,"earth"), do: sec/31557600
-  def age(sec,"mercury"), do: (sec/31557600)/0.2408467
-  def age(sec,"venus"), do: (sec/31557600)/0.61519726
-  def age(sec,"mars"), do: (sec/31557600)/1.8808158
-  def age(sec,"jupiter"), do: (sec/31557600)/11.862615
-  def age(sec,"saturn"), do: (sec/31557600)/29.447498
-  def age(sec,"uranus"), do: (sec/31557600)/84.016846
-  def age(sec,"neptune"), do: (sec/31557600)/164.79132
-  def age(_), do: "invalid"
+  @planet_values %{earth: 1, mercury: 0.2408467, venus: 0.61519726, mars: 1.8808158, jupiter: 11.862615, saturn: 29.447498, uranus: 84.016846, neptune: 164.79132}
+
+  def age(sec, planet) do
+    (sec/31557600)/@planet_values[planet]
+  end
 end
