@@ -1,0 +1,16 @@
+defmodule DNA_count do
+  def dna_info(dna_string) do
+    dna_list = String.codepoints(dna_string)
+    %{A: check_dna(dna_list,"A"), C: check_dna(dna_list,"C"), G: check_dna(dna_list,"G"), T: check_dna(dna_list,"T")}
+  end
+
+  def check_dna([x|rest_dna],x) do
+    1+check_dna(rest_dna,x)
+  end
+  def check_dna([_|rest_dna],x) do
+    check_dna(rest_dna,x)
+  end
+  def check_dna([],x), do: 0
+  def check_dna(_), do: {:error}
+
+end
