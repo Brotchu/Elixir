@@ -1,0 +1,17 @@
+defmodule Rot do
+
+  def cipher(string_value,rot_num) do
+    rotating(String.to_charlist(string_value),rem(rot_num,26)) |> List.to_string
+  end
+
+  def rotating([],_) do
+    []
+  end
+  def rotating([head|tail],num) do
+    [rotate(head,num)|rotating(tail,num)]
+  end
+
+  def rotate(chr,num) when chr>=65 and chr<=90 and chr+num <=90, do: chr+num
+  def rotate(chr,num) when chr>=97 and chr<=122 and chr+num <= 122, do: chr+num
+  def rotate(chr,_), do: chr
+end
