@@ -1,11 +1,40 @@
 defmodule Strain do
 
-  def keep_it([]), do: []
-  def keep_it([head|tail]) when rem(head,2)==0 do
-    [head|keep_it(tail)]
+  def _keep(num_list, condition) do
+      flag=condition.(List.first(num_list))
+      keep_it(num_list, flag ,condition)
   end
-  def keep_it([head|tail]) when rem(head,2)!=0 do
-    keep_it(tail)
+
+  def _discard(num_list, condition) do
+      flag=!condition.(List.first(num_list))
+      keep_it(num_list, flag ,condition)
   end
+
+
+  def keep_it([],_,_), do: []
+  def keep_it([head|tail],true,condition) do
+    flag=condition.(List.first(tail))
+    [head|keep_it(tail,flag,condition)]
+  end
+  def keep_it([head|tail],false,condition) do
+    flag=condition.(List.first(tail))
+    keep_it(tail,flag ,condition)
+  end
+
+
+
+  def condition_test(num) when rem(num,2)==0 do
+    true
+  end
+  def condition_test(_), do: false
+
+  def _keep_(list, check) do
+    Enum.map(list,fn num -> if check.(num) do num end end) |> Enum.reject(&(&1==nil))
+  end
+
+  def _discard_(list, check) do
+    Enum.map(list,fn num -> unless check.(num) do num end end) |> Enum.reject(&(&1==nil))
+  end
+
 
 end
