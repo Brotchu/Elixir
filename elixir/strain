@@ -1,0 +1,11 @@
+defmodule Strain do
+
+  def keep_it([]), do: []
+  def keep_it([head|tail]) when rem(head,2)==0 do
+    [head|keep_it(tail)]
+  end
+  def keep_it([head|tail]) when rem(head,2)!=0 do
+    keep_it(tail)
+  end
+
+end
