@@ -1,0 +1,22 @@
+defmodule Compare do
+
+  def max_list(list), do: max_of(list,List.first(list))
+  def min_list(list), do: min_of(list,List.first(list))
+
+  def max_of([],max_value), do: max_value
+  def max_of([head|tail],max_value) do
+    max_of(tail,greaterof(head,max_value))
+  end
+
+  def min_of([],min_value), do: min_value
+  def min_of([head|tail],min_value) do
+    min_of(tail,lesserof(head,min_value))
+  end
+
+  defp greaterof(val1,val2) when val1>val2, do: val1
+  defp greaterof(_,val2), do: val2
+
+  defp lesserof(val1,val2) when val1<val2, do: val1
+  defp lesserof(_,val2), do: val2
+
+end
