@@ -1,0 +1,21 @@
+defmodule Check_magic do
+
+  def check_if(data_list,true)
+    do Enum.filter(data_list,&magic?/1)
+  end
+
+  def check_if(data_list,false)
+    do Enum.filter(data_list,&not_magic?/1)
+  end
+
+  def magic?(map_data) do
+    %{magic: value}=map_data
+    value
+  end
+
+  def not_magic?(map_data) do
+    %{magic: value}=map_data
+    !value
+  end
+
+end
