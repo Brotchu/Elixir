@@ -1,0 +1,7 @@
+defmodule Word do
+
+  def count(sentence) do
+    sentence |> String.split |> Enum.count
+  end
+
+end

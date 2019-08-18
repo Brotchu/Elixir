@@ -1,0 +1,7 @@
+defmodule Cap_word do
+
+  def capitalize(sent) do
+    sent |> String.split |> Enum.map(&String.capitalize/1) |>Enum.join(" ")
+  end
+
+end
