@@ -1,0 +1,13 @@
+defmodule Unix do
+
+  def list(name,ptn) do
+    name |> Path.relative_to_cwd |> file_list |> Enum.filter(fn a -> String.contains?(a,ptn) end)
+  end
+
+  def file_list(path) do
+    list_file=File.ls(path)
+    {:ok,files}=list_file
+    files
+  end
+
+end
