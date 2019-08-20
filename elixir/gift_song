@@ -1,0 +1,25 @@
+defmodule TwelveDays do
+
+
+
+@gifts ["and a Partridge in a Pear Tree", "two Turtle Doves", "three French Hens", "four Calling Birds", "five Gold Rings", "six Geese-a-Laying", "seven Swans-a-Swimming", "eight Maids-a-Milking", "nine Ladies Dancing", "ten Lords-a-Leaping", "eleven Pipers Piping", "twelve Drummers Drumming"]
+
+@days %{1 => "first", 2 => "second", 3 => "third", 4 => "fourth", 5 => "fifth", 6 => "sixth", 7 => "seventh", 8 => "eighth", 9 => "ninth", 10 => "tenth" ,11 => "eleventh", 12 => "twelfth"}
+
+  def sing_song() do
+    1..12 |> Enum.each(&sing_day/1)
+  end
+
+  def sing_day(num) do
+    line="On the "<>@days[num]<>" day of Christmas my true love gave to me: "<>list_gifts(num)<>"."
+    IO.puts line
+  end
+
+  def list_gifts(1) do
+    Enum.take(@gifts,1) |> Enum.join("") |> String.trim_leading("and")
+  end
+  def list_gifts(num) do
+    Enum.take(@gifts,num) |> Enum.reverse |> Enum.join(", ")
+  end
+
+end
