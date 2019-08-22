@@ -1,0 +1,53 @@
+defmodule Fib do
+
+
+//trying out stream to generate fibanocci series
+//==================================================================================
+
+  def series(num) do
+    Stream.unfold(0,fn n -> {n,n+1} end) |> Stream.take(num) |> Enum.to_list |> gen_fib(0,0)
+  end
+
+//Enum.to_list will have to get whole stream first
+
+  def gen_fib([],_,_), do: []
+  def gen_fib([0|tail],_,_), do: [0|gen_fib(tail,0,1)]
+  def gen_fib([1|tail],_,_), do: [1|gen_fib(tail,1,0)]
+  def gen_fib([_head|tail],num,num_1) do
+    [num+num_1| gen_fib(tail,num+num_1,num)]
+  end
+
+//======================================================================================
+
+
+
+//A different approach, to process in batches with stream
+//=================================================================================
+  def lazy_series(num) do
+    Stream.unfold(1, fn n-> {n,n+1} end) |> Stream.take(num) |> Stream.chunk_every(50)
+    |> Stream.flat_map(&batch_series/1)
+    |> Enum.each(&output/1)
+  end
+//=============================
+  def output(val) do
+    IO.inspect val
+  end
+
+  def batch_series(vals) do
+    Enum.map(vals,&get_series/1)
+  end
+
+  def get_series(pos) do
+    gen_series(0,1,2,pos)
+  end
+
+//function to get fib series, tail recursion?
+//========================================
+  defp gen_series(_,_,_,1), do: 0
+  defp gen_series(_,_,_,2), do: 1
+  defp gen_series(_num_2,num_1,x,x), do: num_1
+  defp gen_series(num_2,num_1,ctr,req) do
+    gen_series(num_1,num_1+num_2,ctr+1,req)
+  end
+//========================================================================================
+end
