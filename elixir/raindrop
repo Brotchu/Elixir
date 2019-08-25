@@ -1,0 +1,34 @@
+defmodule Raindrops do
+
+
+  def convert(num) do
+    {num,""}
+    |> check_div(3)
+    |> check_div(5)
+    |> check_div(7)
+    |> check_string
+  end
+
+
+  def check_string(num_tuple) do
+    {num,str}=num_tuple
+    String.length(str) |> checkon(num,str)
+  end
+
+
+  defp checkon(0,n,_), do: n
+  defp checkon(_,_,val), do: val
+
+
+  def check_div(num_tuple,div) do
+    {num,str}=num_tuple
+    {num, modify_string(str,rem(num,div),div)}
+  end
+
+  defp modify_string(str,0,3), do: str<>"Pling"
+  defp modify_string(str,0,5), do: str<>"Plang"
+  defp modify_string(str,0,7), do: str<>"Plong"
+  defp modify_string(str,_,_), do: str
+
+
+end
