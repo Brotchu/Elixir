@@ -2,9 +2,15 @@ defmodule Anagram do
 
   def  generate(str) do
     str
-    |> String.upcase
-    |> String.split
+    |> String.split(~r{[\s-:]}, trim: true)
+    |> Enum.map(&split_composite/1)
+    |> List.flatten
     |> Enum.map_join(&String.first/1)
+    |> String.upcase
   end
+
+def split_composite(val) do
+  String.split(val,~r{(?<second>[a-z0-9])[A-Z]}, on: [:second])
+end
 
 end
