@@ -1,0 +1,10 @@
+defmodule Anagram do
+
+  def  generate(str) do
+    str
+    |> String.upcase
+    |> String.split
+    |> Enum.map_join(&String.first/1)
+  end
+
+end
