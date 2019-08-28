@@ -1,0 +1,28 @@
+defmodule Scrabble do
+
+  @score_list [{"AEIOULNRST",1}, {"DG",2}, {"BCMP",3}, {"FHVWY",4}, {"K",5}, {"JX",8}, {"QZ",10}]
+
+
+  def score(str) do
+    str
+    |> String.upcase
+    |> String.codepoints
+    |> Enum.map(&val_of/1)
+    |> Enum.reduce(fn(x,acc) -> x+acc end)
+  end
+
+
+  def val_of(alpha) do
+    get_each_score(alpha,@score_list,false,0)
+  end
+
+
+  def get_each_score(val,[head|tail],false,_scrabble_val) do
+    {pttn,score} = head
+    get_each_score(val,tail,String.contains?(pttn,val),score)
+  end
+  def get_each_score(_,_,true,scrabble_val), do: scrabble_val
+  def get_each_score(_,[],_,_), do: "invalid"
+
+
+end
