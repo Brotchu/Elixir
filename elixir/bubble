@@ -1,0 +1,12 @@
+defmodule Sort do
+
+def bubble(num_list) do
+  step(num_list,[])
+end
+
+def step([],res_list), do: res_list
+def step(l1,res_list) do
+  step(List.delete(l1, Enum.max(l1) ),Enum.concat(res_list, [Enum.max(l1)] ) )
+end
+
+end
