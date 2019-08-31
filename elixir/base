@@ -1,0 +1,25 @@
+defmodule Number do
+
+  def get_val(num,base,trg_base) do
+      get_val_list([],num)
+      |> compute_val(base,0,0)
+      |> convert_base(trg_base,[])
+      |> compute_val(10,0,0)
+  end
+
+  def get_val_list(res_list,0), do: Enum.reverse res_list
+  def get_val_list(res_list,num) do
+    get_val_list(Enum.concat([rem(num,10)],res_list),div(num,10))
+  end
+
+  def compute_val([],_,_,acc), do: acc |> round
+  def compute_val([head|tail],base,place,acc) do
+    compute_val(tail,base,place+1,acc+head*(:math.pow(base,place)) )
+  end
+
+  def convert_base(0,_,res_list), do: res_list
+  def convert_base(val, base, res_list) do
+    convert_base( div(val,base) ,base, Enum.concat( [rem(val,base)], res_list ) )
+  end
+
+end
