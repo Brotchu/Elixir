@@ -1,0 +1,13 @@
+defmodule Triangle do
+
+  def check(side1,side2,side3) when side1==side2+side3, do: "Degenerate Triangle"
+  def check(side1,side2,side3) when side2==side1+side3, do: "Degenerate Triangle"
+  def check(side1,side2,side3) when side3==side1+side2, do: "Degenerate Triangle"
+  def check(_side1, _side1, _side1), do: "Equilateral Triangle"
+  def check(_side1, _side1, _side3), do: "Isosceles Triangle"
+  def check(_side1, _side2, _side1), do: "Isosceles Triangle"
+  def check(_side1, _side2, _side2), do: "Isosceles Triangle"
+  def check(_side1, _side2, _side3), do: "Scalene Triangle"
+
+
+end
