@@ -1,0 +1,25 @@
+defmodule ETL do
+
+  @value_map [{ 1, ["A","E","I","O","U","L","N","R","S","T"]}, {2, ["D","G"]}, {3, ["B","C","M","P"]}, {4, ["F","H","V","W","Y"]}, {5, ["K"]}, {8, ["J","X"]}, {10, ["Q","Z"]}]
+
+    def migrate() do
+      @value_map
+      |> Enum.map(&migrate_vals/1)
+      |> Enum.flat_map(fn(x) -> x end)
+    end
+    def migrate(val_list) do
+      val_list
+      |> Enum.map(&migrate_vals/1)
+      |> Enum.flat_map(fn(x) -> x end)
+    end
+
+
+    def migrate_vals(val_map) do
+      {val,alphs} = val_map
+      alphs
+      |> Enum.map(&String.downcase/1)
+      |> Enum.map( fn(x) -> {x,val} end)
+    end
+
+
+end
