@@ -1,0 +1,15 @@
+defmodule Ams do
+
+  def isAmstrong?(num) do
+    get_amstrong_val(num,0)
+    |> check(num)
+  end
+
+  defp get_amstrong_val(0,acc), do: round acc
+  defp get_amstrong_val(num,acc) do
+    get_amstrong_val( div(num,10) , acc + :math.pow( rem(num,10),3 ) )
+  end
+
+  defp check(x,x), do: True
+  defp check(_,_), do: False
+end
