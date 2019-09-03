@@ -1,0 +1,22 @@
+defmodule Num do
+
+
+  def perfect?(num) do
+    check_perfect(num, get_factors_sum(num))
+  end
+
+  defp check_perfect(x,x), do: {x, "Perfect"}
+  defp check_perfect(x,y) when x > y , do: {x, "Deficient"}
+  defp check_perfect(x,_y), do: {x, "Abundant"}
+
+  defp get_factors_sum(num) do
+
+    Stream.unfold(1,fn x -> {x,x+1} end)
+    |> Stream.take(div(num,2))
+    |> Stream.filter( fn(x) -> rem(num,x)==0 end)
+    |> Enum.reduce( fn(x,acc) -> x+acc end)
+
+  end
+
+
+end
