@@ -1,0 +1,17 @@
+defmodule Collatz do
+
+
+  def conj(num) , do: compute(num, 0)
+
+
+  def compute(1,times), do: IO.puts("#{times} 1")
+  def compute(n,times) when rem(n,2)==0 do
+    IO.puts("#{times} #{n}")
+    compute(div(n,2) , times+1)
+  end
+  def compute(n,times) do
+    IO.puts("#{times} #{n}")
+    compute( 3*n + 1 , times+1 )
+  end
+
+end
