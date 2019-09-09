@@ -1,0 +1,23 @@
+defmodule  Grep do
+
+  def find( pattern, file_name ) do
+
+    {:ok, file} = File.open( file_name, [:read] )
+    make_list( file,[], :ok)
+    |> Enum.filter(fn(x) -> String.contains?(x,pattern) end)
+    |> Enum.each( fn(x) -> IO.puts x  end  )
+
+    #|> Enum.scan( fn(x) -> String.trim_trailing(x,"\n") end)
+  end
+
+  defp make_list(_,res_list,:eof), do: res_list
+  defp make_list( file_stream, res_list, _line_val) do
+    make_list( file_stream, add_line( IO.read(file_stream, :line ), res_list ), IO.read(file_stream, :line))
+  end
+
+
+  defp add_line(:eof, list), do: list
+  defp add_line(val, list), do: Enum.concat(list , [val])
+
+
+end
