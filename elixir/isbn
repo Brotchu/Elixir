@@ -1,0 +1,28 @@
+defmodule ISBN do
+
+  def check(code) do
+
+    code
+    |> String.graphemes
+    |> Enum.filter(&filter_alpha/1)
+    |> Enum.map(&String.to_integer/1)
+    |> compute(10,0)
+    |> rem(11)
+    |> isvalid?
+
+  end
+
+  def filter_alpha("-"), do: false
+  def filter_alpha(_x), do: true
+
+
+  def compute([],_,sum), do: sum
+  def compute([head| tail],place,sum) do
+    compute(tail,place-1,sum+head*place)
+  end
+
+  def isvalid?(0), do: "Valid code"
+  def isvalid?(_), do: "Invalid code"
+
+
+end
