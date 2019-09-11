@@ -1,0 +1,17 @@
+defmodule ID3parser do
+
+
+  def tag(file_name) do
+    extract( File.read(file_name) )
+  end
+
+
+  def extract({:ok,mp3_file}) do
+    audio_part_size = byte_size(mp3_file) - 128
+    << _::binary-size(audio_part_size), id3_tag::binary >> =  mp3_file
+    << _::binary-size(3), title::binary-size(30) , artist::binary-size(30), album::binary-size(30), year::binary-size(4), _rest::binary >> = id3_tag
+    %{:title => title, :artist => artist, :album => album , :year => year}
+  end
+  def extract(_), do: "Couldnt read file"
+
+end
