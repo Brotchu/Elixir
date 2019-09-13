@@ -4,10 +4,11 @@ defmodule Weather.Worker do
   def loop do
     receive do
       {sender_pid, location} ->
-        send(sender_pid, temperature_of(location) )
+        send(sender_pid, {:ok,temperature_of(location)} )
     _ ->
       IO.puts "wrong message"
     end
+    loop()
   end
 
   def temperature_of(location) do
@@ -22,7 +23,7 @@ defmodule Weather.Worker do
 
   defp url_for(location) do
     location= URI.encode(location)
-    "http://api.openweathermap.org/data/2.5/weather?q=#{location}&appid=#{get_API_key}"
+    "http://api.openweathermap.org/data/2.5/weather?q=#{location}&appid=#{get_API_key()}"
   end
 
   defp parse_response( {:ok, %HTTPoison.Response{ body: body, status_code: 200}} ) do
